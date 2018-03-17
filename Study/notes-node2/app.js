@@ -1,29 +1,24 @@
-console.log('Starting app.js.');
-
 const fs = require('fs');
 const _ = require('lodash');
+const yargs = require('yargs');
 
 const notes = require('./notes.js');
 
-var res = notes.addNotes();
+const argv = yargs.argv;
 
-console.log(res);
-console.log(`Notes add(1,2) = ${notes.add(1,2)}`);
+var command = argv._[0];
+//console.log('Command: ', command);
+// console.log('Process', process.argv);
+console.log('Yargs', argv);
 
-//console.log(user);
-
-// Remark back-quotatioon for ${} enclosing !
-// `something` is called template string (ES6 feature)
-fs.appendFileSync('greetings.txt',`Hello ${user.username}\n`);
-
-fs.appendFile('greetings.txt', `Hello ${user.username} !!! \n`, function(err) {
-    if (err) { console.log('Unable to write to file');}
-});
-
-
-// lodash exercise
-console.log(_.isString(true));
-console.log(_.isString('Hiroshi Nomura'));
-
-var filteredArray = _.uniq(['Mantaro', 2, 'Nomura', 1, 2, 3, 4]);
-console.log(filteredArray);
+if (command == 'add') {
+  notes.addNote(argv.title, argv.body);
+} else if ( command === 'list') {
+  notes.getAll();
+} else if ( command === 'read' ) {
+  notes.getNote(argv.title);
+} else if ( command === 'remove') {
+  notes.removeNote(argv.title);
+} else {
+  console.log('Not recognized');
+}
