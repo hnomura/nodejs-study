@@ -38,7 +38,7 @@ const argv = yargs
     }).then( (response) => {
         // resolve weatherUrl promise 
         var temperature = response.data.currently.temperature; 
-        var apparentTemperature = response.data.currently.apprentTemperature;
+        var apparentTemperature = response.data.currently.apparentTemperature;
         console.log(`Current Temperature : ${temperature}`); 
         console.log(`Apprent Temperature : ${apparentTemperature}`); 
     }).catch( (e)=>{
