@@ -10,12 +10,28 @@ it('should add two numbers', () => {
     // }
 });
 
+// testing asynchronous code
+it('should async add two numbers', (done) => {
+    utils.async_add( 4, 3, (sum)=>{
+        expect(sum).toBe(7).toBeA('number');
+        done();
+    });
+});
+
 it('should square a number', () => {
     var res = utils.square(9);
     expect(res).toBe( 81 ).toBeA('number');
     // if (res !== 81 ) {
     //     throw new Error(`Expected 81, but got ${res}`);
     // }
+});
+
+// testing asynchronous code
+it('should async square a number', (done) => {
+    utils.async_square(9, (result) => {
+        expect(result).toBe(81).toBeA('number');
+        done();
+    });
 });
 
 it('should expect some values', () => {
