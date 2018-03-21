@@ -4,6 +4,8 @@ const express = require('express');
 // Express.js view engine for handlebar.js
 const hbs = require('hbs');
 
+const port = process.env.PORT || 3000;
+
 var app = express();
 
 // HBS partials hbs files in '/views/partials' folder
@@ -68,7 +70,7 @@ app.get('/bad', (req,res) => {
         errorMessage: 'Unable to handle request'
     });
 });
-app.listen(3000 ,()=> {
-    console.log('Server is up on port 3000');
+app.listen(port ,()=> {
+    console.log(`Server is up on port ${port}`);
 });
 
