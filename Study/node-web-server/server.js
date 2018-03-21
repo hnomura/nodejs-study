@@ -5,8 +5,23 @@ const hbs = require('hbs');
 
 var app = express();
 
+// HBS partials hbs files in '/views/partials' folder
+hbs.registerPartials(__dirname + '/views/partials');
+
+// HBS helper with no input parameter
+hbs.registerHelper('getCurrentYear', () => {
+    return new Date().getFullYear();
+});
+// HBS helper with one input parameter 
+hbs.registerHelper('screamIt', (text) => {
+    return text.toUpperCase();
+});
+
 app.set('view engine', 'hbs');
+
+// Static files
 app.use(express.static(__dirname + '/public'));
+
 
 app.get( '/', (req, res) => {
     // res.send('<h1>Hello Express</h1>');
@@ -20,15 +35,13 @@ app.get( '/', (req, res) => {
     // });
     res.render('home.hbs', {
         pageTitle: 'Home Page', 
-        currentYear: new Date().getFullYear(),
         welcomeMessage: 'Welcome to my home'
     });
 });
 
 app.get('/about', (req,res) => { 
     res.render('about.hbs', {
-        pageTitle: 'About This Page',
-        currentYear: new Date().getFullYear()
+        pageTitle: 'About This Page'
     });
 });
 

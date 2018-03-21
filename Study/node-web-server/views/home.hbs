@@ -5,10 +5,11 @@
         <title>Some Website</title>
     </head>
     <body>
-        <h1>{{pageTitle}}</h1>
-        <p>{{welcomeMessage}}</p>
+        {{> header}}
+
+        <!-- Helper 'screamIt' with input parameter 'welcomeMessage' -->
+        <p>{{screamIt welcomeMessage}}</p>
     </body>
-    <footer>
-        <p>Copyright {{currentYear}}</p>
-    </footer>
+
+    {{> footer}}
 </html>
