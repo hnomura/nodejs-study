@@ -1,3 +1,4 @@
+// npm run test-watch : for nodemon 
 const utils = require('./utils');
 
 it('should add two numbers', () => {
