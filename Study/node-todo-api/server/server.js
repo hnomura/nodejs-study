@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const {ObjectID} = require('mongodb');
 
 var {mongoose} =  require('./db/mongoose');
 var {Todo} = require('./models/todo');
@@ -22,12 +23,39 @@ app.post('/todos',(req, res) => {
 
 app.get('/todos', (req, res) => {
     Todo.find().then((todos) => {
-        res.send({
-            todos
-        });
+        res.send({todos});
     },(e) => {
         res.status(400).send(e);
     });
+});
+
+// GET /todos/123234
+app.get('/todos/:id', (req,res) => {
+    // Todo.findById()
+    // 1) success 
+    // 1.1) user found = send it back 
+    // 1.2) user not found = send back 404 with empty body 
+    // 2) error = no corresponding user : status=400 and empty body 
+
+    // /todos/12345 ==> req.params.id=1234
+    var id = req.params.id;
+
+    // validate ID by using ObjectdID.isValid() 
+    // if invalid, respond status 404 with empty body 
+    if ( !ObjectID.isValid(id) ) { 
+        return res.status(404).send();
+    }
+
+    Todo.findById(id).then( (todo) => {
+        if (!todo) { 
+            return res.status(404).send();
+        }
+        // success path
+        res.send({todo});
+    }).catch( (e) => {
+        res.status(400).send();
+    });
+
 });
 
 app.listen(3000, () => {
