@@ -81,6 +81,7 @@ app.delete('/todos/:id', (req,res) => {
 
 app.patch('/todos/:id', (req,res) => {
     var id = req.params.id;
+    
     // pick text/completed attributes (if exist)
     var body = _.pick(req.body, ['text', 'completed']);
 
