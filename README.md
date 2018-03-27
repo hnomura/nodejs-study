@@ -22,7 +22,7 @@ Hosting web server by `express`, and `handlebar` as view engine with its *templa
 Simple web server with REST APIs. Uses `request` package to use 3rd parties' REST API (google geolocation, DarkSky weather). Examining `promise` is part of this tutorial. 
 
 ## note-tests 
-Unit testing server application by using `supertest`, `expect`, and `Mocha`.  Customizing `package.json` to run unit test cases (`test-watch` script) with `rpm run test-watch` command.  
+Unit testing server application by using `supertest`, `expect`, and `Mocha`.  Customizing `package.json` to run unit test cases (`test-watch` script) with `npm run test-watch` command.  
 
 ## node-todo-api
 Realistic RESTful server with CRUD methods in place.  Using `mongodb` as backend database. Using `mongodb native` is examined in playground. Final code uses `mongoose` for easy interaction with `mongodb`.  Leverage the unit testing to each of CRUD method use-cases.  
