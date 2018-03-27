@@ -28,7 +28,9 @@ Unit testing server application by using `supertest`, `expect`, and `Mocha`.  Cu
 Realistic RESTful server with CRUD methods in place.  Using `mongodb` as backend database. Using `mongodb native` is examined in playground. Final code uses `mongoose` for easy interaction with `mongodb`.  Leverage the unit testing to each of CRUD method use-cases.  
 Including the usage of utilities such as: 
 - Postman (testng CRUD APIs)
-- Robo 3T (interactive access to mongoDB)
+- Robo 3T (interactive access to mongoDB)  
+
+Expect is [Jest Expect](https://facebook.github.io/jest/docs/en/expect.html), **not** the old [mjackson expect](https://github.com/mjackson/expect)
 
 
 
