@@ -4,26 +4,10 @@ const {ObjectID} = require('mongodb');
 
 const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
+const {todos, populateTodos, users, populateUsers} = require('./seed/seed');
 
-const todos = [{
-    _id: new ObjectID(),
-    text: 'First test todo'
-}, {
-    _id: new ObjectID(),
-    text: 'Second test today',
-    completed: true, 
-    completedAt: 333
-}];
-
-
-// before every test case
-// Remove everything in Todos collection 
-// NOTE: Mocha timeout has been increased to 5000msec in package.json
-beforeEach( (done) => { 
-    Todo.remove({}).then( () => {
-        return Todo.insertMany(todos);
-    }).then( () => done() );
-});
+beforeEach( populateUsers );
+beforeEach( populateTodos );
 
 // POST /todos test
 describe('POST /todos', () => {
