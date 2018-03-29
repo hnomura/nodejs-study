@@ -96,8 +96,9 @@ UserSchema.statics.findByCredentials = function(email, password)  {
             return Promise.reject();
         }
         return new Promise((resolve, reject) => {
+            // confirm if given password matches with the encrypted one stored in DB.
             bcrypt.compare( password, user.password, (err,res) => {
-                if (res) {
+                if (res) { // res is true when matched
                     resolve(user);
                 } else {
                     reject();
@@ -108,6 +109,7 @@ UserSchema.statics.findByCredentials = function(email, password)  {
 };
 
 // Middleware
+// overwrite password by encripted one
 UserSchema.pre('save', function (next) {
     var user = this; 
 
