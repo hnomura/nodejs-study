@@ -283,6 +283,8 @@ describe('POST /users/login', () => {
     });
 
     it('should reject login', (done) => {
+        // users[1] does not have tokens[] created in seed.js. 
+        // Hence, upon rejecting login, tokens[] must be still empty. 
         request(app)
             .post('/users/login')
             .send({
