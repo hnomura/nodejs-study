@@ -135,6 +135,22 @@ app.get('/users/me',authenticate, (req,res) => {
     res.send(req.user);
 });
 
+// POST /users/login 
+app.post('/users/login', (req,res) => {
+    var body = _.pick(req.body, ['email', 'password']);
+
+    User.findByCredentials(body.email, body.password).then((user) => {
+        // generate new token, append to user.tokens[] array, save it.
+        // if password mismatch, then Promise.reject() is called, hence 
+        // this async jumps to catch block. So is with invalid email, too.
+        user.generateAuthToken().then((token) => {
+            res.header('x-auth', token).send(user);            
+        });
+    }).catch((e) => {
+        res.status(400).send();
+    });
+});
+
 app.listen(port, () => {
     console.log(`Started on port ${port}`);
 });
