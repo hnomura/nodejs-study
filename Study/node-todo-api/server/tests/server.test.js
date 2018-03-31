@@ -267,7 +267,7 @@ describe('GET /users/me', () => {
 describe('POST /users', () => {
     it('should create a user', (done) => {
         var email = 'example@example.com';
-        var password = '123abcd';
+        var password = 'passexample';
 
         request(app)
             .post('/users')
