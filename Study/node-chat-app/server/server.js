@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
 
         // To everyone including the socket sending this message
         io.emit('newMessage', generateMessage( message.from, message.text ));
-        callback('This is from the server.'); // acknowledgement       
+        callback(); // acknowledgement       
     });
 
     socket.on('createLocationMessage', (coords) => {
