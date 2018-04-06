@@ -10,12 +10,20 @@ socket.on('disconnect', function () {
 
 socket.on('newMessage', function(message) {
     console.log('newMessage', message);
+
+    var li = jQuery('<li></li>');
+    li.text(`${message.from}: ${message.text}`);
+
+    jQuery('#messages').append(li);
 });
 
-socket.emit('createMessage', {
-    from: 'Auto Generator', 
-    text: 'Client Connected'
-}, function (data) {
-    // acknowledgement
-    console.log('Got it', data);
+jQuery('#message-form').on('submit', function (e) {
+    e.preventDefault(); // prevent page refresh defaul tbehavior
+
+    socket.emit('createMessage', {
+        from: 'User', 
+        text: jQuery('[name=message]').val()
+    }, function () {
+        // acknowledgement callback 
+    });
 });
