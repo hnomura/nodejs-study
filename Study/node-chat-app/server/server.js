@@ -23,11 +23,12 @@ io.on('connection', (socket) => {
     // Notification to everyone except for the newly connected socket 
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
     
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', (message, callback) => {
         console.log('createMessage', message);
 
         // To everyone including the socket sending this message
         io.emit('newMessage', generateMessage( message.from, message.text ));
+        callback('This is from the server.'); // acknowledgement 
 
         // // everybody but this socket 
         // socket.broadcast.emit('newMessage', {
