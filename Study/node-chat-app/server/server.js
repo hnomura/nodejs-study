@@ -4,6 +4,7 @@ const express = require('express');
 const socketIO = require('socket.io');
 
 const {generateMessage, generateLocationMessage} = require('./utils/message');
+const {isRealString} = require('./utils/validation');
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000; 
@@ -23,6 +24,17 @@ io.on('connection', (socket) => {
     // Notification to everyone except for the newly connected socket 
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
     
+    // listener to 'join'
+    socket.on('join', (params, callback) => {
+        console.log('join', params);
+
+        if (!isRealString(params.name) || !isRealString(params.room)) { 
+            callback('Name and room name are required');
+        }
+        callback();
+    });
+
+    // liisner to 'createMessage'
     socket.on('createMessage', (message, callback) => {
         console.log('createMessage', message);
 
@@ -31,6 +43,7 @@ io.on('connection', (socket) => {
         callback(); // acknowledgement       
     });
 
+    // listner to 'createLocationMessage'
     socket.on('createLocationMessage', (coords) => {
         console.log('newMessage with Coordinate')
         io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
