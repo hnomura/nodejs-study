@@ -55,18 +55,25 @@ io.on('connection', (socket) => {
 
     // liisner to 'createMessage'
     socket.on('createMessage', (message, callback) => {
-        console.log('createMessage', message);
+        // console.log('createMessage', message);
 
-        // To everyone including the socket sending this message
-        io.emit('newMessage', generateMessage( message.from, message.text ));
+        var user = users.getUser(socket.id);
+        if (user && isRealString(message.text)) { 
+            // only those in the same room
+            io.to(user.room).emit('newMessage', generateMessage( user.name, message.text ));
+        }
         callback(); // acknowledgement       
     });
 
     // listner to 'createLocationMessage'
     socket.on('createLocationMessage', (coords) => {
-        console.log('newMessage with Coordinate')
-        io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
-    })
+        // console.log('newMessage with Coordinate')
+
+        var user = users.getUser(socket.id);
+        if ( user ) { 
+            io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude));
+        }
+    });
 
 
     socket.on('disconnect', () => {
