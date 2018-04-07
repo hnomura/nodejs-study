@@ -21,6 +21,8 @@ function scrollToBottom() {
 socket.on('connect', function () {
     console.log('Connected to server');
     
+    // when connected to server, emit 'join' with location.search parameter
+    // server checks the valid name/room parameter
     var params = jQuery.deparam(window.location.search);
     socket.emit('join', params, function (err) {
         if (err) {
