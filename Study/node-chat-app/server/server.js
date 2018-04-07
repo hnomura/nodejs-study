@@ -34,7 +34,6 @@ io.on('connection', (socket) => {
         // socket.broadcast.emit ==> everyone connected except this socket 
         //   socket.broadcast.to(room).emit ==> everyone connected except this socke in the room
         // socket.emit => specific user 
-        //   
 
         // Welcome message to newly connected socket
         socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app') );
@@ -42,7 +41,6 @@ io.on('connection', (socket) => {
         // Notification to everyone except for the newly connected socket (only those in the same room)
         socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined`));
         
-
         callback();
     });
 
