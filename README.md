@@ -32,7 +32,24 @@ Including the usage of utilities such as:
 
 Expect is [Jest Expect](https://facebook.github.io/jest/docs/en/expect.html), **not** the old [mjackson expect](https://github.com/mjackson/expect)
 
+## async-wait
+ES7 async/await usage illustration. 
+async function always returns promise implicitly.  
+await can be called only inside of async function. 
+await is against promise.  
 
+```
+const chilldFunc = (a) => {
+    return new Promise((resolve,reject) => {
+        x = 2*a;
+        resolve(x);
+    });
+};
+const parentFunc = async () => {
+    const a = 100;
+    const x = await childFunc(a);
+};  
+```
 
 
 
