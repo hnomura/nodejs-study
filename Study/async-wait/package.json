@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
   }
 }

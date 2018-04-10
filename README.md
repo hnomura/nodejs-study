@@ -33,6 +33,7 @@ Including the usage of utilities such as:
 Expect is [Jest Expect](https://facebook.github.io/jest/docs/en/expect.html), **not** the old [mjackson expect](https://github.com/mjackson/expect)
 
 ## async-wait
+### app-promises.js
 ES7 async/await usage illustration. 
 async function always returns promise implicitly.  
 await can be called only inside of async function. 
@@ -48,8 +49,21 @@ const chilldFunc = (a) => {
 const parentFunc = async () => {
     const a = 100;
     const x = await childFunc(a);
+    return x;
 };  
+parentFunc().then( (x) => {
+    console.log(x);
+});
 ```
+### currency-convert.js
+One public API is http://api.fixer.io/latest?base=USD, here USD can be the other currency code. This is to get exchange rate.  
+Another public API is https://restcountries.eu/rest/v2/currency/cad, here cad can be the other country code.  This is to get a list of countries that use the given currency. 
+
+By using these two APIs, code convert currency from one to another and list the countries in which the exchanged currency can be used. 
+To make `get` request to these APIs, `axios` is used because it supports promise, i.e., await can be used.  
+If `request` is used, usual callback will be the only way (not verified, though)
+
+
 
 
 
